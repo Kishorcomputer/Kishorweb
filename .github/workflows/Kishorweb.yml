@@ -1,0 +1,72 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+
+export default function HomePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    if (username === "kishorcomputer" && password === "kishorcomputerbd") {
+      setIsLoggedIn(true);
+    } else {
+      alert("ভুল আইডি অথবা পাসওয়ার্ড");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-blue-50 p-4 text-gray-800">
+      <header className="flex items-center justify-between p-4 bg-blue-900 text-white rounded-xl">
+        <img src="/kishor-logo.jpg" alt="Kishor Computer Logo" className="h-12" />
+        <h1 className="text-2xl font-bold">KISHOR COMPUTER</h1>
+        <p>আপনার সেবায় এই প্রতিষ্ঠান প্রতিজ্ঞাবদ্ধ</p>
+      </header>
+
+      <marquee className="text-red-600 mt-4">স্কুল, কলেজ, পাসপোর্ট, জাতীয় পরিচয়পত্র আবেদনসহ সকল অনলাইন আবেদন গ্রহণ করা হয়।</marquee>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <Card>
+          <CardContent className="p-4">
+            <h2 className="text-xl font-semibold mb-2">Our Services</h2>
+            <ul className="list-disc ml-6">
+              <li>ছবি বের করা হয়</li>
+              <li>ফটোকপি করা হয়</li>
+              <li>কম্পিউটার কম্পোজ</li>
+              <li>অনলাইনে যাবতীয় আবেদন</li>
+              <li>স্কুল/কলেজ এডমিশন</li>
+              <li>পাসপোর্ট আবেদন</li>
+              <li>পুলিশ ক্লিয়ারেন্স আবেদন</li>
+              <li>জাতীয় পরিচয়পত্র আবেদন ও সংশোধন</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        {!isLoggedIn ? (
+          <Card>
+            <CardContent className="p-4">
+              <h2 className="text-xl font-semibold mb-2">Owner Login</h2>
+              <Input placeholder="ID" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-2" />
+              <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="mb-2" />
+              <Button onClick={handleLogin}>Login</Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardContent className="p-4">
+              <h2 className="text-xl font-semibold mb-2">Memo Panel</h2>
+              <p>আপনি এখন মেমো তৈরি করতে পারবেন।</p>
+              <Button className="mt-2">নতুন মেমো তৈরি করুন</Button>
+            </CardContent>
+          </Card>
+        )}
+      </section>
+
+      <footer className="mt-10 text-center text-sm text-gray-500">
+        যোগাযোগ: kishorcomputerbd@gmail.com
+      </footer>
+    </div>
+  );
+}
